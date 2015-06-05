@@ -69,13 +69,20 @@
 			<version>1.0</version>
 		</dependency>
 
-		<!-- JSR-330 --> 
+		<!-- JSR-330 -->
 		<dependency>
 			<groupId>javax.inject</groupId>
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
-		
+
+		<!-- Primefaces Version 5 -->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>5.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

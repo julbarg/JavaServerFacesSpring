@@ -19,6 +19,9 @@
 		org.springframework.web.context.request.RequestContextListener
 	</listener-class>
   </listener>
+    <listener>
+        <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+    </listener>
 
   <!-- Change to "Production" when you are ready to deploy -->
   <context-param>
@@ -28,7 +31,7 @@
  
   <!-- Welcome page -->
   <welcome-file-list>
-    <welcome-file>default.jsf</welcome-file>
+    <welcome-file>login.jsf</welcome-file>
   </welcome-file-list>
  
   <!-- JSF Mapping -->
