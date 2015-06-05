@@ -37,6 +37,7 @@ public class Login {
             System.out.println(user);
          }
       } catch (Exception e) {
+         e.printStackTrace();
       }
 
    }
