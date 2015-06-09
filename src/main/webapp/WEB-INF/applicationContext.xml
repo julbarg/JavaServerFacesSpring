@@ -9,9 +9,17 @@
 	<bean
 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
-	<bean id="JavaServerFacesSpring"
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>/WEB-INF/DataSource.properties</value>
+		</property>
+	</bean>
+
+	<bean id="JavaServerFacesSpringCpymes"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="dataSource" ref="dataSource" />
+		<property name="dataSource" ref="dataSourceCpymes" />
+		<property name="persistenceUnitName" value="CPYMES" />
 		<property name="packagesToScan" value="com.julian.entity" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
@@ -23,16 +31,43 @@
 		</property>
 	</bean>
 
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/cpymes" />
-		<property name="username" value="cpymes" />
-		<property name="password" value="Claro2015*" />
+	<bean id="JavaServerFacesSpringDocSis"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSourceDocSis" />
+		<property name="persistenceUnitName" value="DOCSIS" />
+		<property name="packagesToScan" value="com.julian.entity" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+			</props>
+		</property>
 	</bean>
 
-	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="JavaServerFacesSpring" />
+	<bean id="dataSourceCpymes"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${cpymes.driver}" />
+		<property name="url" value="${cpymes.url}" />
+		<property name="username" value="${cpymes.user}" />
+		<property name="password" value="${cpymes.password}" />
+	</bean>
+
+	<bean id="dataSourceDocSis"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${docsis.driver}" />
+		<property name="url" value="${docsis.url}" />
+		<property name="username" value="${docsis.user}" />
+		<property name="password" value="${docsis.password}" />
+	</bean>
+
+	<bean id="transactionManagerCpymes" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="JavaServerFacesSpringCpymes" />
+	</bean>
+
+	<bean id="transactionManagerDocSis" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="JavaServerFacesSpringDocSis" />
 	</bean>
 
 	<bean id="persistenceExceptionTranslationPostProcessor"

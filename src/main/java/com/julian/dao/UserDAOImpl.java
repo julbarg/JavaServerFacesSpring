@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.julian.entity.UserEntity;
 
@@ -14,16 +15,21 @@ import com.julian.entity.UserEntity;
 @Service
 public class UserDAOImpl implements UserDAO {
 
-   @PersistenceContext
+   @PersistenceContext(unitName = "CPYMES")
    EntityManager entityManager;
 
    @Override
    public ArrayList<UserEntity> findAll() throws Exception {
       TypedQuery<UserEntity> query = entityManager.createNamedQuery("UserEntity.findAll", UserEntity.class);
       ArrayList<UserEntity> results = (ArrayList<UserEntity>) query.getResultList();
-      entityManager.close();
 
       return results;
+   }
+
+   @Override
+   @Transactional("transactionManagerCpymes")
+   public void create(UserEntity user) throws Exception {
+      entityManager.persist(user);
    }
 
 }

@@ -9,8 +9,10 @@ import javax.faces.bean.SessionScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.julian.dao.DocSisAuditDAO;
 import com.julian.dao.UserDAO;
 import com.julian.dto.User;
+import com.julian.entity.DocsisAuditEntity;
 import com.julian.entity.UserEntity;
 
 
@@ -21,6 +23,9 @@ public class Login {
 
    @Autowired
    private UserDAO userDAO;
+
+   @Autowired
+   private DocSisAuditDAO docSisAuditDAO;
 
    private User user;
 
@@ -36,6 +41,13 @@ public class Login {
          for (UserEntity user : listUsers) {
             System.out.println(user);
          }
+         ArrayList<DocsisAuditEntity> listDocsisAuditEntities = docSisAuditDAO.findAll();
+         for (DocsisAuditEntity docsisAuditEntity : listDocsisAuditEntities) {
+            System.out.println(docsisAuditEntity);
+         }
+         UserEntity user = new UserEntity("camila", "213532", "admin");
+         userDAO.create(user);
+
       } catch (Exception e) {
          e.printStackTrace();
       }

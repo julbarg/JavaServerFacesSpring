@@ -9,4 +9,6 @@ public interface UserDAO {
 
    public ArrayList<UserEntity> findAll() throws Exception;
 
+   public void create(UserEntity user) throws Exception;
+
 }
